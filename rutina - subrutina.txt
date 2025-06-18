@@ -1,0 +1,63 @@
+/** >>Natural Source Header 000000
+/** >>Natural Source Header 000000
+/** New Program LEER-DAT.
+/**
+/** :author Training
+/* TODO Enter your code here
+
+
+DEFINE DATA
+
+LOCAL
+  1 V-CONTRATO VIEW OF NCCRUISE
+    2 PRICE-2W (P10.3)
+
+
+  1 #PRECIO (N7.2)
+  1 #TOTAL (N9.2)
+
+
+END-DEFINE
+
+MOVE 0 TO #TOTAL
+
+READ (3) V-CONTRATO LOGICAL BY CRUISE-ID
+
+  MOVE PRICE-2W TO #PRECIO
+
+  CALLNAT 'SUBPRACT' 'ADD' #PRECIO #TOTAL
+END-READ
+
+
+WRITE 'PRECIO TOTAL ACUMULADO:' #TOTAL
+END
+
+
+
+--------------------------------------------------------------------
+
+
+/** New Subprogram SUBPRACT.
+/**
+/** :author Training
+/* TODO Enter your code here
+
+
+DEFINE DATA
+
+PARAMETER
+  1 #OPCION (A4)
+  1 #PRECIO-IN (N7.2)
+  1 #TOTAL-OUT (N9.2)
+
+END-DEFINE
+
+IF #OPCION = 'ADD'
+
+    WRITE 'VALORES: ' #PRECIO-IN
+
+    ADD #PRECIO-IN TO #TOTAL-OUT
+END-IF
+
+
+END
